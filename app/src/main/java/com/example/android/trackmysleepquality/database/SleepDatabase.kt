@@ -65,6 +65,7 @@ abstract class SleepDatabase: RoomDatabase() {
                                 // Common when upgrading from one version of the app w/ its database schema to a new version of the app w/ a newer database schema.
                     INSTANCE = instance // Assign instance to the newly created database.
                 }
+
                 return instance
             }
         }
