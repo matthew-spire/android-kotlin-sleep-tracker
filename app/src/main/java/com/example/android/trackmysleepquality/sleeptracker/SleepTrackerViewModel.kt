@@ -42,7 +42,7 @@ class SleepTrackerViewModel(
                 private var tonight = MutableLiveData<SleepNight?>()
 
                 // Define a variable, `nights`, then `getAllNights()` from the database and assign to the `nights` variable
-                private val nights = database.getAllNights()
+                val nights = database.getAllNights()
 
                 // Initialize the `tonight` variable by creating an `init` block and calling `initializeTonight()`
                 init {
