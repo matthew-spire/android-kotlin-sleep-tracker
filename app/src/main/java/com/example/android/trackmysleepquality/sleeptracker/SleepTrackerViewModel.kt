@@ -20,7 +20,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
-import com.example.android.trackmysleepquality.formatNights
 import kotlinx.coroutines.launch
 
 /**
@@ -160,9 +159,13 @@ class SleepTrackerViewModel(
                 // Implement onClear(), the click handler for the Clear button
                 fun onClear() {
                         viewModelScope.launch {
+                                // Clear the database table
                                 clear()
+
+                                // Clear tonight since it is no longer in the database
                                 tonight.value = null
 
+                                // Show a snackbar message
                                 _showSnackbarEvent.value = true
                         }
                 }
@@ -172,9 +175,16 @@ class SleepTrackerViewModel(
                         database.clear()
                 }
 
-                // Transform `nights` into `nightsString` using the `formatNights()` function from `Util.kt`
-                val nightsString = nights.map { nights ->
-                        formatNights(nights, application.resources)
+                private val _navigateToSleepDataQuality = MutableLiveData<Long?>()
+                val navigateToSleepDataQuality
+                        get() = _navigateToSleepDataQuality
+
+                fun onSleepNightClicked(id: Long) {
+                        _navigateToSleepDataQuality.value = id
+                }
+
+                fun onSleepDataQualityNavigated() {
+                        _navigateToSleepDataQuality.value = null
                 }
 }
 

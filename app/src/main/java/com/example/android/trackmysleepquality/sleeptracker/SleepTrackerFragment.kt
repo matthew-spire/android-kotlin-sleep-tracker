@@ -22,9 +22,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepTrackerBinding
@@ -71,11 +71,17 @@ class SleepTrackerFragment : Fragment() {
         // Set the variable for the ViewModel in our layout, which is accessible via the binding object to the ViewModel
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
+        // Add GridLayout
+        val gridLayoutManager = GridLayoutManager(activity, 3)
+        binding.sleepList.layoutManager = gridLayoutManager
+
         // Specify the current activity as the lifecycle owner of the binding. Necessary so that the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
         // Create an Adapter and tell the RecyclerView to use the adapter to display list items on the screen
-        val adapter = SleepNightAdapter()
+        val adapter = SleepNightAdapter(SleepNightListener {
+            nightId -> sleepTrackerViewModel.onSleepNightClicked(nightId) // Toast.makeText(context, "$nightId", Toast.LENGTH_LONG).show()
+        })
         binding.sleepList.adapter = adapter
 
         // Tell the Adapter the data to be adapted
@@ -95,6 +101,17 @@ class SleepTrackerFragment : Fragment() {
                     )
                 )
                 sleepTrackerViewModel.doneNavigating()
+            }
+        }
+
+        sleepTrackerViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner) { night ->
+            night?.let {
+                this.findNavController().navigate(
+                    SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepDetailFragment(
+                        night
+                    )
+                )
+                sleepTrackerViewModel.onSleepDataQualityNavigated()
             }
         }
 
