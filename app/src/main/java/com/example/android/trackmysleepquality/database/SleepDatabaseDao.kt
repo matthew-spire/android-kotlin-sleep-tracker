@@ -47,4 +47,8 @@ interface SleepDatabaseDao {
     // Query to return the most recent night by looking at all nights. Nullable so that it can handle if the table is empty
     @Query("SELECT * FROM daily_sleep_quality_table ORDER BY nightId DESC LIMIT 1")
     suspend fun getTonight(): SleepNight?
+
+    // Selects and returns the night with given nightId
+    @Query("SELECT * from daily_sleep_quality_table WHERE nightId = :key")
+    fun getNightWithId(key: Long): LiveData<SleepNight>
 }
