@@ -70,7 +70,7 @@ git checkout BRANCH_NAME
 
 **Step 3: Find and complete the TODOs**
 
-Once you've checked out the branch, you'll have the code in the exact state you need. You'll even have TODOs, which are special comments that tell you all the steps you need to complete the exercise. You can easily navigate to all the TODOs using Android Studio's TODO tool. To open the TODO tool, click the button at the bottom of the screen that says TODO. This will display a list of all comments with TODO in the project. 
+Once you've checked out the branch, you'll have the code in the exact state you need. You'll even have TODOs, which are special comments that tell you all the steps you need to complete the exercise. You can easily navigate to all the TODOs using Android Studio's TODO tool. To open the TODO tool, click the button at the bottom of the screen that says TODO. This will display a list of all comments with TODO in the project.
 
 We've numbered the TODO steps so you can do them in order:
 ![todos](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58bf00e7_todos/todos.png
@@ -96,7 +96,7 @@ The **Diff** link will take you to a Github diff as seen below:
 ![diff](https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58bf0108_diffsceenshot/diffsceenshot.png
 )
 
-All of the code that was added in the solution is in green, and the removed code (which will usually be the TODO comments) is in red. 
+All of the code that was added in the solution is in green, and the removed code (which will usually be the TODO comments) is in red.
 
 You can also compare your code locally with the branch of the following step.
 

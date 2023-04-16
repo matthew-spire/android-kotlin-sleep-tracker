@@ -75,6 +75,13 @@ class SleepTrackerFragment : Fragment() {
         val gridLayoutManager = GridLayoutManager(activity, 3)
         binding.sleepList.layoutManager = gridLayoutManager
 
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int) = when (position) {
+                0 -> 3
+                else -> 1
+            }
+        }
+
         // Specify the current activity as the lifecycle owner of the binding. Necessary so that the binding can observe LiveData updates
         binding.lifecycleOwner = this
 
@@ -87,7 +94,7 @@ class SleepTrackerFragment : Fragment() {
         // Tell the Adapter the data to be adapted
         sleepTrackerViewModel.nights.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.submitList(it)
+                adapter.addHeaderAndSubmitList(it)
             }
         }
 
